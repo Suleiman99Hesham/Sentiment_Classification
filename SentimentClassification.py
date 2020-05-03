@@ -21,9 +21,9 @@ for i in range (len(dataList)):
         labelVector.append(1)
 dataList['Output']=labelVector
 
-for i ,k in zip(dataList['text'][:10],dataList['Output'][:10]):
-     print(i ,"=>", k )
-print("------------------------------------------------------------------")
+#for i ,k in zip(dataList['text'][:10],dataList['Output'][:10]):
+#     print(i ,"=>", k )
+#print("------------------------------------------------------------------")
 
 #add these signs to punctution var
 punctuation+='”'
@@ -43,8 +43,8 @@ for i in cleared_data:
     temp_list.append(word)
 tokenizedLest=[temp_list,dataList['Output']]
 
-for i ,k in zip(tokenizedLest[0][:10],tokenizedLest[1][:10]):
-   print(i,"=>",k)
+#for i ,k in zip(tokenizedLest[0][:10],tokenizedLest[1][:10]):
+#   print(i,"=>",k)
 
 
 #generate feature vector using word embedding
