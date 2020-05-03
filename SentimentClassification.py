@@ -4,6 +4,7 @@ import nltk
 from gensim.models import Word2Vec
 from sklearn import svm
 from sklearn import metrics
+from string import punctuation
 
 
 #add labeled vector to dataset
@@ -20,19 +21,30 @@ for i in range (len(dataList)):
         labelVector.append(1)
 dataList['Output']=labelVector
 
-# for i ,k in zip(dataList['text'][:10],dataList['Output'][:10]):
-#     print(i , k )
-# print("------------------------------------------------------------------")
+for i ,k in zip(dataList['text'][:10],dataList['Output'][:10]):
+     print(i ,"=>", k )
+print("------------------------------------------------------------------")
+
+#add these signs to punctution var
+punctuation+='”'
+punctuation+='’'
+#remove punctution
+cleared_data=[]
+for sentence in dataList['text']:
+    cleared=''.join([c for c in sentence if c not in punctuation])
+    cleared_data.append(cleared)
+
+#############################################################################
 #tokenized tweets 
 tokenizedLest=[]
 temp_list=[]
-for i in dataList['text']:
+for i in cleared_data:
     word=nltk.word_tokenize(i)
     temp_list.append(word)
 tokenizedLest=[temp_list,dataList['Output']]
 
-#for i ,k in zip(tokenizedLest[0][:10],tokenizedLest[1][:10]):
-#   print(i,k)
+for i ,k in zip(tokenizedLest[0][:10],tokenizedLest[1][:10]):
+   print(i,"=>",k)
 
 
 #generate feature vector using word embedding
@@ -113,4 +125,3 @@ sentence_VF=result/len(sentence_tokenized)
 sentence_out_predict=clf.predict([sentence_VF])
 print(sentence_out_predict)
 # =============================================================================
-#print("Accuracy: %.2f%%" % (scores[1]*100))
